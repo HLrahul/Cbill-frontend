@@ -57,9 +57,13 @@ const Ullist = styled.ul`
 `;
 
 const ImgDiv = styled.div`
+  background: white;
   display: flex;
-  height: 100%;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
   align-items: center;
+  justify-content: center;
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -67,5 +71,5 @@ const StyledNavLink = styled(NavLink)`
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 900;
-  color: black;
+  color: white;
 `;

@@ -16,6 +16,12 @@ function App() {
 export default App;
 
 const AppWrapper = styled.div`
+  background: black;
   min-height: 100vh;
-  width: 100%;
+  width: 70%;
+  margin: auto;
+
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 `;
