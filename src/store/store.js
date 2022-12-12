@@ -6,7 +6,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.value.userName = action.payload.name;
+      state.value.userName = action.payload.username;
       state.value.userAccessToken = action.payload.accessToken;
     },
 

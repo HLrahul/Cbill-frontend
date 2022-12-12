@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { login } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import axios from "../api/axios";
@@ -11,11 +13,14 @@ function Login() {
 
   const [msg, setMsg] = useState("");
 
+  const dispatch = useDispatch();
+
   const LoginHandler = async (e) => {
+    let response;
     e.preventDefault();
 
     try {
-      const response = await axios.post(
+      response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ username, password }),
         {
@@ -23,7 +28,8 @@ function Login() {
           withCredentials: false,
         }
       );
-      console.log(JSON.stringify(response));
+      console.log(JSON.stringify(response?.data?.access));
+
       setMsg("Login Successful!");
     } catch (err) {
       if (!err?.response) {
@@ -34,6 +40,18 @@ function Login() {
         setMsg("SOMETHING WENT WRONG!");
       }
     }
+    dispatch(
+      login({
+        username: username,
+        accessToken: response?.data?.access,
+      })
+    );
+    const userName = useSelector((state) => state.user.value.userName);
+    const accessToken = useSelector(
+      (state) => state.user.value.userAccessToken
+    );
+    console.log("USER NAME STORED IN STORE = " + userName);
+    console.log("USER ACESS TOKEN STORED IN STORE = " + accessToken);
   };
 
   return (
