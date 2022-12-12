@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -6,9 +6,9 @@ html {
 
 :root {
   font-family: "Poppins", Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  /* font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  font-weight: 400; */
 
   /* color-scheme: light dark; */
 

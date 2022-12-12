@@ -1,15 +1,24 @@
-import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
+import styled from "styled-components";
 import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
 
 function App() {
   return (
-    <AppWrapper>
-      <Router>
-        <Navbar />
-      </Router>
-    </AppWrapper>
+    <Provider store={store}>
+      <AppWrapper>
+        <Router>
+          <Navbar />
+
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+          </Routes>
+        </Router>
+      </AppWrapper>
+    </Provider>
   );
 }
 
