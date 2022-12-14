@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { login } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,20 +15,37 @@ function Login() {
 
   const dispatch = useDispatch();
 
+  const userName = useSelector((state) => state.user.value.userName);
+  const accessToken = useSelector((state) => state.user.value.userAccessToken);
+
+  useEffect(() => {
+    console.log("USER NAME STORED IN STORE = " + userName);
+    console.log("USER ACCESS TOKEN STORED IN STORE = " + accessToken);
+  }, [userName, accessToken]);
+
   const LoginHandler = async (e) => {
-    let response;
     e.preventDefault();
 
     try {
-      response = await axios.post(
+      const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ username, password }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: false,
+          withCredentials: true,
         }
       );
       console.log(JSON.stringify(response?.data?.access));
+
+      dispatch(
+        login({
+          username: username,
+          accessToken: response?.data?.access,
+        })
+      );
+
+      console.log("USER NAME USED = " + username);
+      console.log("USER ACCESS TOKEN RETURNED = " + response?.data?.access);
 
       setMsg("Login Successful!");
     } catch (err) {
@@ -40,18 +57,6 @@ function Login() {
         setMsg("SOMETHING WENT WRONG!");
       }
     }
-    dispatch(
-      login({
-        username: username,
-        accessToken: response?.data?.access,
-      })
-    );
-    const userName = useSelector((state) => state.user.value.userName);
-    const accessToken = useSelector(
-      (state) => state.user.value.userAccessToken
-    );
-    console.log("USER NAME STORED IN STORE = " + userName);
-    console.log("USER ACESS TOKEN STORED IN STORE = " + accessToken);
   };
 
   return (
