@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 import Login from "../components/Login";
-import Register from "../components/Register";
 
 function Homepage() {
   return (
     <>
       <Login />
-      <Register />
 
       <InfoSection id="info">
         <p>Courier Billing</p>

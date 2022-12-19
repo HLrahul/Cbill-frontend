@@ -1,39 +1,23 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/store";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import axios from "../api/axios";
 import styled from "styled-components";
 import billingPNG from "../assets/billingIcon.png";
 
-const LOGOUT_URL = "logout/";
-
 function Navbar() {
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.value.username);
   const accessToken = useSelector((state) => state.user.value.userAccessToken);
 
-  const LogoutHandler = async (e) => {
-    e.preventDefault();
+  let [navLinks, setNavLinks] = useState([]);
 
-    try {
-      const response = await axios.post(
-        LOGOUT_URL,
-        {},
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(JSON.stringify(response));
-      dispatch(logout);
-      navigate("/");
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    if (userName === null && accessToken === null) {
+      setNavLinks(["login", "info"]);
+    } else {
+      setNavLinks(["logout"]);
     }
-  };
+  }, [userName, accessToken]);
 
   return (
     <NavbarWrapper>
@@ -44,19 +28,13 @@ function Navbar() {
           </NavLink>
         </ImgDiv>
         <div>
-          {userName !== "" && accessToken !== "" ? (
-            <Ullist>
-              <StyledNavLink href="#logout" onClick={LogoutHandler}>
-                Logout
+          <Ullist>
+            {navLinks.map((navs, i) => (
+              <StyledNavLink key={i} href={`#${navs}`}>
+                {navs}
               </StyledNavLink>
-            </Ullist>
-          ) : (
-            <Ullist>
-              <StyledNavLink href="#login"> Login </StyledNavLink>
-              <StyledNavLink href="#register"> Register </StyledNavLink>
-              <StyledNavLink href="#info"> Info </StyledNavLink>
-            </Ullist>
-          )}
+            ))}
+          </Ullist>
         </div>
       </NavBar>
     </NavbarWrapper>

@@ -8,7 +8,7 @@ import axios from "../api/axios";
 
 const LOGIN_URL = "login/";
 
-function Login(message = "") {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -53,7 +53,7 @@ function Login(message = "") {
     <Section id="login">
       <LoginWrapper>
         <LoginForm>
-          <Message> {message !== "" ? message : msg} </Message>
+          <Message> {msg} </Message>
           <h1
             style={{
               textAlign: "center",
