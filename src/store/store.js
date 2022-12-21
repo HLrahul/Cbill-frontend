@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const initialState = { value: { userName: "", userAccessToken: "" } };
+const initialState = { value: { userName: null, userAccessToken: null } };
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -11,8 +11,8 @@ const userSlice = createSlice({
     },
 
     logout: (state) => {
-      state.value.userName = "";
-      state.value.userAccessToken = "";
+      state.value.userName = null;
+      state.value.userAccessToken = null;
     },
   },
 });

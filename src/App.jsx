@@ -27,9 +27,8 @@ function App() {
 export default App;
 
 const AppWrapper = styled.div`
-  background: black;
   min-height: 100vh;
-  width: 70%;
+  width: 100%;
   margin: auto;
 
   @media (max-width: 400px) {

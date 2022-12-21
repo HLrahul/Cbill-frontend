@@ -12,10 +12,10 @@ function Navbar() {
   let [navLinks, setNavLinks] = useState([]);
 
   useEffect(() => {
-    if (userName === null && accessToken === null) {
-      setNavLinks(["login", "info"]);
+    if (userName === null || accessToken === null) {
+      setNavLinks([]);
     } else {
-      setNavLinks(["logout"]);
+      setNavLinks([]);
     }
   }, [userName, accessToken]);
 
@@ -47,18 +47,21 @@ const NavbarWrapper = styled.div`
   top: 0;
   position: sticky;
   z-index: 2;
+  background: transparent;
+  width: 100%;
 `;
 
 const NavBar = styled.div`
-  background: black;
   height: 10vh;
+  width: 70%;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0px 10px; */
 
   @media (max-width: 400px) {
     padding: 0px 20px;
+    width: 80%;
   }
 `;
 
@@ -75,10 +78,14 @@ const StyledImg = styled.img`
 const Ullist = styled.ul`
   height: 100%;
   width: 15rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  list-style-type: none;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+  }
 `;
 
 const ImgDiv = styled.div`
@@ -98,7 +105,7 @@ const StyledNavLink = styled.a`
 
   transition: 0.5s ease;
   &:hover {
-    color: #11b2b8;
+    color: #f70b4e;
     transform: scale(1.05);
   }
 `;

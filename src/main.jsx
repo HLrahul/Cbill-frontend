@@ -7,7 +7,6 @@ import "./index.css";
 const MainWrapper = styled.div`
   min-height: 100%;
   max-width: 100%;
-  background: black;
 `;
 
 ReactDOM.createRoot(document.getElementById("root")).render(

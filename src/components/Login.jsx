@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { login } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -56,9 +56,11 @@ function Login() {
           <Message> {msg} </Message>
           <h1
             style={{
+              fontSize: "2rem",
               textAlign: "center",
-              marginBottom: "2rem",
-              color: "#3fc0e0",
+              marginBottom: "1.5rem",
+              color: "white",
+              // color: "#3fc0e0",
               letterSpacing: "2px",
             }}
           >
@@ -66,25 +68,16 @@ function Login() {
           </h1>
           <Form onSubmit={LoginHandler}>
             <InputPair>
-              <label
-                style={{ color: "white", paddingBottom: "10px" }}
-                htmlFor="name"
-              >
-                Username
-              </label>
+              <Label htmlFor="name">Username</Label>
               <Input
                 type="text"
                 name="name"
+                autoComplete="off"
                 onChange={(e) => setUsername(e.target.value)}
               />
             </InputPair>
             <InputPair>
-              <label
-                style={{ color: "white", paddingBottom: "10px" }}
-                htmlFor="password"
-              >
-                Password
-              </label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 type="password"
                 name="password"
@@ -102,25 +95,42 @@ function Login() {
 export default Login;
 
 const Message = styled.div`
+  font-size: 0.75rem;
   height: 5vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3fc0e0;
-  margin-bottom: 2rem;
+  color: white;
+  margin-bottom: 0.25rem;
 `;
 
 const Section = styled.section`
-  min-height: 90vh;
+  height: 50vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 400px) {
+    height: 50vh;
+  }
 `;
 
-const LoginWrapper = styled.div``;
-const LoginForm = styled.div``;
+const LoginWrapper = styled.div`
+  height: inherit;
+  width: 80%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+`;
+const LoginForm = styled.div`
+  height: inherit;
+`;
 
 const Form = styled.form`
   display: flex;
@@ -131,6 +141,17 @@ const InputPair = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+`;
+const Label = styled.label`
+  color: white;
+  padding-bottom: 10px;
+
+  @media (max-width: 400px) {
+    color: #f70b4e;
+  }
 `;
 const Input = styled.input`
   &:-webkit-autofill,
@@ -138,18 +159,22 @@ const Input = styled.input`
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     box-shadow: none;
-    -webkit-box-shadow: 0 0 0 30px black inset !important;
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
   }
   &:-webkit-autofill {
-    -webkit-text-fill-color: #3fc0e0 !important;
+    -webkit-text-fill-color: #f70b4e !important;
   }
 
   background: transparent;
   outline: none;
   border: none;
   border-bottom: 1px solid white;
-  color: #3fc0e0;
+  color: white;
   padding-bottom: 5px;
+
+  @media (max-width: 400px) {
+    color: #f70b4e;
+  }
 `;
 const Button = styled.button`
   margin-top: 0.5rem;
@@ -161,10 +186,16 @@ const Button = styled.button`
   letter-spacing: 1px;
   width: auto;
   height: 2rem;
+  width: 5rem;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
   transition: 0.5s;
+  background: #f70b4e;
 
   &:hover {
-    transform: scale(1.05);
-    background: #3fc0e0;
+    // transform: scale(1.05);
+    background: #f70b4e;
   }
 `;
