@@ -5,13 +5,15 @@ import { districts } from "./districtList";
 
 function Cash() {
   const [cocom, setCocom] = useState(0);
-  const [comp, setComp] = useState("akash");
+  const [comp, setComp] = useState("");
 
   useEffect(() => {
     if (cocom.length === 10) {
       setComp("anjani");
-    } else {
+    } else if (cocom.length === 9) {
       setComp("akash");
+    } else {
+      setComp("NULL");
     }
   }, [cocom]);
 
@@ -19,78 +21,126 @@ function Cash() {
     <CashWrapper>
       <CashFormCard>
         <CashForm>
-          <Tile>
-            <InputPair>
-              <Label htmlFor="name">Courier Number</Label>
-              <Input
-                type="number"
-                name="name"
-                onChange={(e) => setCocom(e.target.value)}
-                autoComplete="off"
-              />
-            </InputPair>
+          <Tile
+            style={{
+              transition: "0.5s",
+              boxShadow:
+                comp === "akash"
+                  ? "0 8px 32px 0 rgba(43, 43, 221, 0.596)"
+                  : comp === "anjani"
+                  ? "0 8px 32px 0 rgba(230, 23, 23, 0.849)"
+                  : "0 8px 32px 0 rgba(157, 157, 167, 0.37)",
+            }}
+          >
+            <DivOne>
+              <InputPair>
+                <Label htmlFor="name">CN</Label>
+                <Input
+                  style={{ width: "12ch" }}
+                  type="number"
+                  name="name"
+                  onChange={(e) => setCocom(e.target.value)}
+                  autoComplete="off"
+                />
+              </InputPair>
+            </DivOne>
 
-            <InputPair>
-              <Label htmlFor="name">Courier Company</Label>
-              <Input
-                type="text"
-                name="name"
-                value={comp}
-                onChange={(e) => setComp(e.target.value)}
-              />
-            </InputPair>
-          </Tile>
+            <DivTwo>
+              <DivThree>
+                <h3
+                  style={{
+                    boxShadow: "1px 2px 2px 2px rgba(0, 0, 0, 0.2)",
+                    transition: ".5s ease",
+                    transform: "rotate(270deg)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1rem",
+                    background:
+                      comp === "akash"
+                        ? "#12328b"
+                        : comp === "anjani"
+                        ? "#a31111"
+                        : "gray",
+                    borderRadius: "10px",
+                    color:
+                      comp === "akash"
+                        ? "#12328b"
+                        : comp === "anjani"
+                        ? "#a31111"
+                        : "gray",
+                  }}
+                  onChange={(e) => setComp(e.target.value)}
+                >
+                  {comp}
+                </h3>
+              </DivThree>
 
-          <Tile>
-            <InputPair>
-              <Label htmlFor="name">From</Label>
-              <Input type="text" name="name" autoComplete="new-password" />
-            </InputPair>
+              <DivFour>
+                <DivFive>
+                  <InputPair>
+                    <Label htmlFor="name">From</Label>
+                    <Input type="text" autoComplete="new-password" />
+                  </InputPair>
 
-            <InputPair>
-              <Label htmlFor="name">To</Label>
-              <Input type="text" name="name" autoComplete="new-password" />
-            </InputPair>
+                  <InputPair>
+                    <Label htmlFor="name">To</Label>
+                    <Input type="text" autoComplete="new-password" />
+                  </InputPair>
 
-            <InputPair>
-              <Label htmlFor="name">To District</Label>
-              <Input
-                type="text"
-                name="name"
-                autoComplete="new-password"
-                list="availableDistricts"
-              />
-              <datalist id="availableDistricts">
-                {districts.map((item, i) => (
-                  <option value={`${item}`}>{item}</option>
-                ))}
-              </datalist>
-            </InputPair>
-          </Tile>
+                  <InputPair>
+                    <Label htmlFor="name">District</Label>
+                    <Input
+                      type="text"
+                      autoComplete="new-password"
+                      list="availableDistricts"
+                    />
+                    <datalist id="availableDistricts">
+                      {districts.map((item, i) => (
+                        <option key={i} value={`${item}`}>
+                          {item}
+                        </option>
+                      ))}
+                    </datalist>
+                  </InputPair>
+                </DivFive>
 
-          <Tile>
-            <InputPair>
-              <Label htmlFor="name">Weight</Label>
-              <Input
-                type="number"
-                name="name"
-                defaultValue={50}
-                autoComplete="new-password"
-              />
-            </InputPair>
+                <DivSix>
+                  <InputPair>
+                    <Label htmlFor="name">📞 +91</Label>
+                    <Input
+                      style={{ width: "12ch" }}
+                      type="number"
+                      autoComplete="off"
+                    />
+                  </InputPair>
 
-            <InputPair>
-              <Label htmlFor="name">Rate</Label>
-              <Input type="number" name="name" autoComplete="new-password" />
-            </InputPair>
+                  <InputPair>
+                    <Label htmlFor="name">⚖️</Label>
+                    <Input
+                      style={{ width: "7ch" }}
+                      type="number"
+                      step="50"
+                      defaultValue={50}
+                      autoComplete="new-password"
+                    />
+                  </InputPair>
 
-            <InputPair>
-              <Label htmlFor="name">Phone Number</Label>
-              <Input type="number" name="name" autoComplete="new-password" />
-            </InputPair>
+                  <InputPair>
+                    <Label htmlFor="name">₹</Label>
+                    <Input
+                      style={{ width: "5ch" }}
+                      type="number"
+                      step="10"
+                      autoComplete="new-password"
+                    />
+                  </InputPair>
+                </DivSix>
+              </DivFour>
+            </DivTwo>
           </Tile>
         </CashForm>
       </CashFormCard>
+
+      <Button>BOOK</Button>
     </CashWrapper>
   );
 }
@@ -98,8 +148,9 @@ export default Cash;
 
 const CashWrapper = styled.section`
   width: 100%;
-  height: 100vh;
+  min-height: 90vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -112,7 +163,7 @@ const CashFormCard = styled.div`
   justify-content: center;
 
   @media (max-width: 768px) {
-    height: 95%;
+    height: auto;
   }
 `;
 
@@ -120,27 +171,114 @@ const CashForm = styled.form`
   height: inherit;
   width: inherit;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Tile = styled.div`
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+  width: 70%;
+
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(250, 250, 253, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  @media (max-width: 400px) {
+    padding: 0;
+    min-height: 60vh;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+  }
+`;
+const DivOne = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  height: 20%;
+`;
+const DivTwo = styled.div`
+  display: flex;
+  height: 80%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
+`;
+const DivThree = styled.div`
+  height: 100%;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 400px) {
+    width: 100%;
+    flex-direction: column;
+    transform: rotate(-270deg);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+`;
+const DivFour = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+const DivFive = styled.div`
+  display: flex;
+  height: 50%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+
+  & > * {
+    margin-right: 2rem;
+  }
+
+  @media (max-width: 400px) {
+    width: 80%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+const DivSix = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50%;
+  width: 100%;
+
+  & > * {
+    margin-right: 2rem;
+  }
+
+  @media (max-width: 400px) {
     flex-direction: column;
   }
 `;
 
 const InputPair = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-bottom: 0.5rem;
+
+  @media (max-width: 400px) {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 const Label = styled.label`
   color: white;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
 `;
 const Input = styled.input`
   &:-webkit-autofill,
@@ -154,10 +292,35 @@ const Input = styled.input`
     -webkit-text-fill-color: #3fc0e0 !important;
   }
 
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   background: transparent;
   outline: none;
   border: none;
   border-bottom: 1px solid white;
   color: #3fc0e0;
   padding-bottom: 5px;
+  padding-left: 5px;
+  width: 25ch;
+
+  @media (max-width: 400px) {
+    width: 15ch;
+  }
+`;
+
+const Button = styled.button`
+  margin-top: 2rem;
+  height: 2rem;
+  width: 5rem;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background: black;
+  }
 `;

@@ -12,7 +12,7 @@ function App() {
     <Provider store={store}>
       <AppWrapper>
         <Router>
-          <Navbar />
+          {/* <Navbar /> */}
 
           <Routes>
             <Route path="/" element={<Homepage />} />

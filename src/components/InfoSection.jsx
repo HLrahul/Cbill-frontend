@@ -12,7 +12,7 @@ function InfoSection() {
 export default InfoSection;
 
 const Div = styled.div`
-  height: 90vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@ const Div = styled.div`
 
   @media (max-width: 425px) {
     height: 20vh;
-    margin-top: 4vh;
+    margin-top: 15vh;
   }
 `;
 

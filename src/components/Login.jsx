@@ -118,7 +118,7 @@ const Section = styled.section`
 `;
 
 const LoginWrapper = styled.div`
-  height: inherit;
+  height: 50vh;
   width: 80%;
   position: relative;
   background: rgba(255, 255, 255, 0.25);
@@ -127,6 +127,11 @@ const LoginWrapper = styled.div`
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+
+  @media (max-width: 425px) {
+    width: 80%;
+    height: 50vh;
+  }
 `;
 const LoginForm = styled.div`
   height: inherit;
@@ -193,6 +198,7 @@ const Button = styled.button`
   margin-bottom: 1.5rem;
   transition: 0.5s;
   background: #f70b4e;
+  cursor: pointer;
 
   &:hover {
     // transform: scale(1.05);
