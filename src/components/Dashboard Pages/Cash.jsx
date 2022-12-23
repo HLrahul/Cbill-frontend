@@ -24,19 +24,25 @@ function Cash() {
           <Tile
             style={{
               transition: "0.5s",
+              background:
+                comp === "akash"
+                  ? "rgba(43, 43, 221, 0.25)"
+                  : comp === "anjani"
+                  ? "rgba(230, 23, 23, 0.25)"
+                  : "rgba(0, 0, 0, 0.25)",
               boxShadow:
                 comp === "akash"
                   ? "0 8px 32px 0 rgba(43, 43, 221, 0.596)"
                   : comp === "anjani"
                   ? "0 8px 32px 0 rgba(230, 23, 23, 0.849)"
-                  : "0 8px 32px 0 rgba(157, 157, 167, 0.37)",
+                  : "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
             }}
           >
             <DivOne>
               <InputPair>
                 <Label htmlFor="name">CN</Label>
                 <Input
-                  style={{ width: "12ch" }}
+                  // style={{ width: "12ch" }}
                   type="number"
                   name="name"
                   onChange={(e) => setCocom(e.target.value)}
@@ -47,7 +53,7 @@ function Cash() {
 
             <DivTwo>
               <DivThree>
-                <h3
+                {/* <span
                   style={{
                     boxShadow: "1px 2px 2px 2px rgba(0, 0, 0, 0.2)",
                     transition: ".5s ease",
@@ -69,9 +75,7 @@ function Cash() {
                         : "gray",
                   }}
                   onChange={(e) => setComp(e.target.value)}
-                >
-                  {comp}
-                </h3>
+                ></span> */}
               </DivThree>
 
               <DivFour>
@@ -130,6 +134,7 @@ function Cash() {
                       style={{ width: "5ch" }}
                       type="number"
                       step="10"
+                      defaultValue={40}
                       autoComplete="new-password"
                     />
                   </InputPair>
@@ -180,10 +185,10 @@ const Tile = styled.div`
   display: flex;
   flex-direction: column;
   height: 30vh;
-  width: 70%;
+  width: 50;
 
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(250, 250, 253, 0.37);
+  background: rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 8px 32px 0 rgba(250, 250, 253, 0.37); */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
@@ -191,16 +196,21 @@ const Tile = styled.div`
 
   @media (max-width: 400px) {
     padding: 0;
-    min-height: 60vh;
+    min-height: 40vh;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    width: 80%;
   }
 `;
 const DivOne = styled.div`
   display: flex;
   align-items: center;
   height: 20%;
+
+  @media (max-width: 400px) {
+    width: 70%;
+    height: auto;
+  }
 `;
 const DivTwo = styled.div`
   display: flex;
@@ -208,6 +218,7 @@ const DivTwo = styled.div`
 
   @media (max-width: 400px) {
     flex-direction: column;
+    height: auto;
   }
 `;
 const DivThree = styled.div`
@@ -218,11 +229,7 @@ const DivThree = styled.div`
   justify-content: center;
 
   @media (max-width: 400px) {
-    width: 100%;
-    flex-direction: column;
-    transform: rotate(-270deg);
-    margin-top: 5px;
-    margin-bottom: 5px;
+    display: none;
   }
 `;
 const DivFour = styled.div`
@@ -230,6 +237,9 @@ const DivFour = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 400px) {
+  }
 `;
 const DivFive = styled.div`
   display: flex;
@@ -243,9 +253,8 @@ const DivFive = styled.div`
   }
 
   @media (max-width: 400px) {
-    width: 80%;
+    width: 100%;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
   }
 `;
@@ -269,10 +278,8 @@ const InputPair = styled.div`
   display: flex;
 
   @media (max-width: 400px) {
-    display: flex;
-    width: 80%;
-    align-items: center;
-    justify-content: space-between;
+    width: 70%;
+    margin-bottom: 5px;
   }
 `;
 const Label = styled.label`
@@ -305,10 +312,10 @@ const Input = styled.input`
   color: #3fc0e0;
   padding-bottom: 5px;
   padding-left: 5px;
-  width: 25ch;
+  width: 5rem;
 
   @media (max-width: 400px) {
-    width: 15ch;
+    width: 100%;
   }
 `;
 
