@@ -46,11 +46,11 @@ function Tiles(props) {
           <DivOne>
             <InputPair>
               <Label htmlFor="name" style={{ display: "flex" }}>
-                <P>{formId ? formId + 1 + ". " : ""}</P> CN
+                <P>{formId + 1 + ". "}</P> CN
               </Label>
               <Input
                 // style={{ width: "12ch" }}
-                value={cocom !== null ? cocom : cn !== NaN ? cn : ""}
+                value={cocom !== null ? cocom : cn}
                 type="number"
                 name="name"
                 onChange={(e) => setCocom(e.target.value)}

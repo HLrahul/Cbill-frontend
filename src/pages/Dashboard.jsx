@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Tabs from "../components/Tabs";
 import Cash from "../components/Dashboard Pages/Cash";
 import DashBG from "../assets/dashboardBG.jpg";
+import Popup from "../components/Popup";
 
 function Dashboard() {
   return (

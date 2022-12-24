@@ -17,8 +17,8 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userName = useSelector((state) => state.user.value.userName);
-  const accessToken = useSelector((state) => state.user.value.userAccessToken);
+  const userName = useSelector((state) => state.user.userName);
+  const accessToken = useSelector((state) => state.user.userAccessToken);
 
   const LoginHandler = async (e) => {
     e.preventDefault();

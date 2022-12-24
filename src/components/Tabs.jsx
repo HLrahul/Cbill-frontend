@@ -1,6 +1,11 @@
+import { useState } from "react";
+
 import styled from "styled-components";
+import Popup from "./Popup";
 
 function Tabs() {
+  const [trigger, setTrigger] = useState(false);
+
   return (
     <TabsWrapper>
       <TabLinks>
@@ -8,8 +13,13 @@ function Tabs() {
           <StyledTabLinks>CASH</StyledTabLinks>
           <StyledTabLinks>CREDIT</StyledTabLinks>
           <StyledTabLinks>RECORDS</StyledTabLinks>
+          <StyledTabLinks onClick={(e) => setTrigger(true)}>
+            LOGOUT
+          </StyledTabLinks>
         </Ullist>
       </TabLinks>
+
+      <Popup trigger={trigger} setTrigger={setTrigger} />
     </TabsWrapper>
   );
 }
