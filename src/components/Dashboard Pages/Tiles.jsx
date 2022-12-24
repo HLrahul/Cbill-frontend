@@ -4,14 +4,19 @@ import styled from "styled-components";
 
 import { districts } from "./districtList";
 
-function Tiles() {
-  const [cocom, setCocom] = useState(0);
-  const [comp, setComp] = useState("");
+function Tiles(props) {
+  const { formId, cn, from, phone, shadow } = props;
+
+  const [cocom, setCocom] = useState(cn);
+  const [comp, setComp] = useState(shadow);
+
+  const [ph, setPh] = useState(null);
+  const [fr, setFr] = useState(null);
 
   useEffect(() => {
-    if (cocom.length === 10) {
+    if (cocom.toString().length === 10) {
       setComp("anjani");
-    } else if (cocom.length === 9) {
+    } else if (cocom.toString().length === 9) {
       setComp("akash");
     } else {
       setComp("NULL");
@@ -24,12 +29,12 @@ function Tiles() {
         <Tile
           style={{
             transition: "0.5s",
-            background:
-              comp === "akash"
-                ? "rgba(92, 92, 255, 0.25)"
-                : comp === "anjani"
-                ? "rgba(255, 78, 78, 0.25)"
-                : "rgba(0, 0, 0, 0.25)",
+            // background:
+            //   comp === "akash"
+            //     ? "rgba(92, 92, 255, 0.25)"
+            //     : comp === "anjani"
+            //     ? "rgba(255, 78, 78, 0.25)"
+            //     : "rgba(0, 0, 0, 0.25)",
             boxShadow:
               comp === "akash"
                 ? "10px 8px 32px 0 rgba(17, 17, 236, 0.596)"
@@ -40,9 +45,12 @@ function Tiles() {
         >
           <DivOne>
             <InputPair>
-              <Label htmlFor="name">CN</Label>
+              <Label htmlFor="name" style={{ display: "flex" }}>
+                <P>{formId ? formId + 1 + ". " : ""}</P> CN
+              </Label>
               <Input
                 // style={{ width: "12ch" }}
+                value={cocom !== null ? cocom : cn !== NaN ? cn : ""}
                 type="number"
                 name="name"
                 onChange={(e) => setCocom(e.target.value)}
@@ -82,7 +90,12 @@ function Tiles() {
               <DivFive>
                 <InputPair>
                   <Label htmlFor="name">From</Label>
-                  <Input type="text" autoComplete="new-password" />
+                  <Input
+                    value={fr !== null ? fr : from}
+                    onChange={(e) => setFr(e.target.value)}
+                    type="text"
+                    autoComplete="new-password"
+                  />
                 </InputPair>
 
                 <InputPair>
@@ -111,6 +124,8 @@ function Tiles() {
                 <InputPair>
                   <Label htmlFor="name">📞 +91</Label>
                   <Input
+                    value={ph !== null ? ph : phone}
+                    onChange={(e) => setPh(e.target.value)}
                     style={{ width: "12ch" }}
                     type="number"
                     autoComplete="off"
@@ -169,6 +184,12 @@ const CashForm = styled.form`
   justify-content: center;
 `;
 
+const P = styled.p`
+  /* color: #4dcc2d;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; */
+`;
+
 const Tile = styled.div`
   padding: 15px;
   display: flex;
@@ -181,7 +202,7 @@ const Tile = styled.div`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
-  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+  border: 1px solid rgba(255, 255, 255, 0.18);
 
   @media (max-width: 400px) {
     padding: 0;

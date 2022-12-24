@@ -17,13 +17,15 @@ function Tabs() {
 export default Tabs;
 
 const TabsWrapper = styled.section`
-  height: 10vh;
-  width: 100%;
+  top: 0;
+  position: sticky;
+  z-index: 10;
 `;
 
 const TabLinks = styled.div`
   height: 10vh;
   width: 100%;
+  background: black;
 `;
 
 const Ullist = styled.ul`
