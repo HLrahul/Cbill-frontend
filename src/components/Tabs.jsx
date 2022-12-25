@@ -84,8 +84,8 @@ const Ullist = styled.ul`
 
   @media (max-width: 768px) {
     position: fixed;
-    left: -100%;
     top: 10vh;
+    right: -100%;
     height: 25vh;
     gap: 10px;
     flex-direction: column;
@@ -95,7 +95,7 @@ const Ullist = styled.ul`
     transition: 0.5s;
 
     &.active {
-      left: 0;
+      right: 0;
     }
   }
 `;
