@@ -5,18 +5,34 @@ import Popup from "./Popup";
 
 function Tabs() {
   const [trigger, setTrigger] = useState(false);
+  const [active, setActive] = useState(false);
+
+  function toggleActive() {
+    setActive((prevActive) => !prevActive);
+  }
+  function activeToggle() {
+    setActive((prevActive) => prevActive);
+  }
 
   return (
     <TabsWrapper>
       <TabLinks>
-        <Ullist>
-          <StyledTabLinks>CASH</StyledTabLinks>
-          <StyledTabLinks>CREDIT</StyledTabLinks>
-          <StyledTabLinks>RECORDS</StyledTabLinks>
+        <Header>
+          <P>COURIER BILLING</P>
+        </Header>
+        <Ullist className={active ? "active" : ""} onClick={toggleActive}>
+          <StyledTabLinks onClick={activeToggle}>CASH</StyledTabLinks>
+          <StyledTabLinks onClick={activeToggle}>CREDIT</StyledTabLinks>
+          <StyledTabLinks onClick={activeToggle}>RECORDS</StyledTabLinks>
           <StyledTabLinks onClick={(e) => setTrigger(true)}>
             LOGOUT
           </StyledTabLinks>
         </Ullist>
+        <Div className={active ? "active" : ""} onClick={toggleActive}>
+          <Span className="bar">bar</Span>
+          <Span className="bar">bar</Span>
+          <Span className="bar">bar</Span>
+        </Div>
       </TabLinks>
 
       <Popup trigger={trigger} setTrigger={setTrigger} />
@@ -35,15 +51,53 @@ const TabsWrapper = styled.section`
 const TabLinks = styled.div`
   height: 10vh;
   width: 100%;
+  padding: 24px 0px;
   background: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Header = styled.div`
+  height: inherit;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+const P = styled.p`
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: white;
 `;
 
 const Ullist = styled.ul`
   height: 10vh;
-  width: 100%;
+  width: 80%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 75px;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: -100%;
+    top: 10vh;
+    height: 25vh;
+    gap: 10px;
+    flex-direction: column;
+    background-color: #000000;
+    width: 100%;
+    text-align: center;
+    transition: 0.5s;
+
+    &.active {
+      left: 0;
+    }
+  }
 `;
 
 const StyledTabLinks = styled.li`
@@ -57,5 +111,40 @@ const StyledTabLinks = styled.li`
 
   &:hover {
     color: #11b2b8;
+  }
+`;
+
+const Div = styled.div`
+  width: 20%;
+  margin-left: auto;
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+
+    &.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    &.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    &.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+`;
+
+const Span = styled.span`
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+
+  @media (max-width: 768px) {
   }
 `;

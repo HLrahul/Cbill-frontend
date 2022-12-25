@@ -64,7 +64,7 @@ const Pop = styled.div`
   }
 
   background: rgba(0, 0, 0, 0.25);
-  box-shadow: 10px 8px 32px 0 rgba(250, 250, 253, 0.37);
+  /* box-shadow: 10px 8px 32px 0 rgba(250, 250, 253, 0.37); */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
