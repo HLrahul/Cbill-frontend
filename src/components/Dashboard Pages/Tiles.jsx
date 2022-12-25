@@ -204,7 +204,7 @@ const Tile = styled.div`
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     padding: 0;
     min-height: 40vh;
     align-items: center;
@@ -217,7 +217,7 @@ const DivOne = styled.div`
   align-items: center;
   height: 20%;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 70%;
     height: auto;
   }
@@ -226,7 +226,7 @@ const DivTwo = styled.div`
   display: flex;
   height: 80%;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     flex-direction: column;
     height: auto;
   }
@@ -238,7 +238,7 @@ const DivThree = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     display: none;
   }
 `;
@@ -248,7 +248,7 @@ const DivFour = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
   }
 `;
 const DivFive = styled.div`
@@ -262,7 +262,7 @@ const DivFive = styled.div`
     margin-right: 2rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -279,7 +279,7 @@ const DivSix = styled.div`
     margin-right: 2rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     flex-direction: column;
   }
 `;
@@ -287,7 +287,7 @@ const DivSix = styled.div`
 const InputPair = styled.div`
   display: flex;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 70%;
     margin-bottom: 5px;
   }
@@ -324,7 +324,7 @@ const Input = styled.input`
   padding-left: 5px;
   width: 5rem;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 100%;
   }
 `;

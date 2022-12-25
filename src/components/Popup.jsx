@@ -59,7 +59,7 @@ const Pop = styled.div`
   width: 25%;
   color: white;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 80%;
   }
 
@@ -83,7 +83,7 @@ const Section = styled.section`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 60%;
   }
 `;

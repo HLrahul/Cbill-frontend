@@ -112,7 +112,7 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     height: 50vh;
   }
 `;
@@ -154,7 +154,7 @@ const Label = styled.label`
   color: white;
   padding-bottom: 10px;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     color: #f70b4e;
   }
 `;
@@ -177,7 +177,7 @@ const Input = styled.input`
   color: white;
   padding-bottom: 5px;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     color: #f70b4e;
   }
 `;

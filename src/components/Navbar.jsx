@@ -59,7 +59,7 @@ const NavBar = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     padding: 0px 20px;
     width: 80%;
   }

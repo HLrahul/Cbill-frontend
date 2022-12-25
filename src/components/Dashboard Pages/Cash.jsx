@@ -94,7 +94,7 @@ const CashWrapper = styled.section`
     margin-bottom: 4rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     min-height: 50vh;
 
     & > * {
@@ -136,7 +136,7 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     height: 25vh;
     width: auto;
     flex-direction: column;
@@ -156,7 +156,7 @@ const Section = styled.section`
 const InputPair = styled.div`
   display: flex;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     margin-bottom: 5px;
   }
 `;
@@ -194,7 +194,7 @@ const Input = styled.input`
   padding-left: 5px;
   width: 5rem;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 100%;
   }
 `;

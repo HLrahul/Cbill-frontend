@@ -29,9 +29,9 @@ function Tabs() {
           </StyledTabLinks>
         </Ullist>
         <Div className={active ? "active" : ""} onClick={toggleActive}>
-          <Span className="bar">bar</Span>
-          <Span className="bar">bar</Span>
-          <Span className="bar">bar</Span>
+          <Span className="bar"></Span>
+          <Span className="bar"></Span>
+          <Span className="bar"></Span>
         </Div>
       </TabLinks>
 
