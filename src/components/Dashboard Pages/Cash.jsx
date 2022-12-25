@@ -163,7 +163,7 @@ const Div = styled.div`
   justify-content: space-around;
 
   @media (max-width: 425px) {
-    width: 50%;
+    width: 60%;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
