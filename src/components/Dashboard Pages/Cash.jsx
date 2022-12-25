@@ -38,38 +38,40 @@ function Cash() {
   return (
     <>
       <Section>
-        <InputPair>
-          <Label>From</Label>
-          <Input
-            type="text"
-            style={{ width: "16ch" }}
-            onChange={(e) => setFrom(e.target.value)}
-          />
-        </InputPair>
-        <InputPair>
-          <Label>Courier Number</Label>
-          <Input
-            type="number"
-            style={{ width: "12ch" }}
-            onChange={(e) => setCn(e.target.value)}
-          />
-        </InputPair>
-        <InputPair>
-          <Label>Phone Number</Label>
-          <Input
-            type="number"
-            style={{ width: "12ch" }}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </InputPair>
-        <InputPair>
-          <Label>Number of Couriers</Label>
-          <Input
-            type="number"
-            style={{ width: "5ch" }}
-            onChange={(e) => setNums(e.target.value)}
-          />
-        </InputPair>
+        <Div>
+          <InputPair>
+            <Label>From</Label>
+            <Input
+              type="text"
+              style={{ width: "16ch" }}
+              onChange={(e) => setFrom(e.target.value)}
+            />
+          </InputPair>
+          <InputPair>
+            <Label>Courier Number</Label>
+            <Input
+              type="number"
+              style={{ width: "12ch" }}
+              onChange={(e) => setCn(e.target.value)}
+            />
+          </InputPair>
+          <InputPair>
+            <Label>Phone Number</Label>
+            <Input
+              type="number"
+              style={{ width: "12ch" }}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </InputPair>
+          <InputPair>
+            <Label>Number of Couriers</Label>
+            <Input
+              type="number"
+              style={{ width: "5ch" }}
+              onChange={(e) => setNums(e.target.value)}
+            />
+          </InputPair>
+        </Div>
       </Section>
 
       <CashWrapper>{tiles}</CashWrapper>
@@ -140,16 +142,31 @@ const Section = styled.section`
     height: 25vh;
     width: auto;
     flex-direction: column;
-    align-items: flex-start;
-    margin-left: 5rem;
+    align-items: center;
+    margin: auto;
 
     & > * {
       margin-right: 0;
     }
   }
 
-  & > * {
+  /* & > * {
     margin-right: 2rem;
+  } */
+`;
+
+const Div = styled.div`
+  height: inherit;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  @media (max-width: 425px) {
+    width: 50%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
 `;
 

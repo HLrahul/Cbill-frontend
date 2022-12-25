@@ -216,6 +216,7 @@ const DivOne = styled.div`
   display: flex;
   align-items: center;
   height: 20%;
+  margin-left: 5px;
 
   @media (max-width: 425px) {
     width: 70%;
