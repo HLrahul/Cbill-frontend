@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Tiles from "./Tiles";
 
 function Cash() {
-  const [nums, setNums] = useState(0);
+  const [nums, setNums] = useState(1);
   const [tiles, setTiles] = useState([]);
 
   const [from, setFrom] = useState("");
@@ -64,12 +64,16 @@ function Cash() {
             />
           </InputPair>
           <InputPair>
-            <Label>Number of Couriers</Label>
+            <Label className="NumsCourierlbl">Number of Couriers</Label>
+            <Dec onClick={() => setNums((prevNums) => prevNums - 1)}>-</Dec>
             <Input
+              className="NumsCourier"
               type="number"
+              value={nums}
               style={{ width: "5ch" }}
               onChange={(e) => setNums(e.target.value)}
             />
+            <Inc onClick={() => setNums((prevNums) => prevNums + 1)}>+</Inc>
           </InputPair>
         </Div>
       </Section>
@@ -160,7 +164,7 @@ const Div = styled.div`
   width: 80%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
   @media (max-width: 425px) {
     width: 60%;
@@ -182,6 +186,10 @@ const Label = styled.label`
   padding-bottom: 5px;
   padding-right: 5px;
   border-bottom: 1px solid white;
+
+  &.NumsCourierlbl {
+    border-right: 1px solid white;
+  }
 `;
 const Input = styled.input`
   &:-webkit-autofill,
@@ -214,4 +222,28 @@ const Input = styled.input`
   @media (max-width: 425px) {
     width: 100%;
   }
+
+  &.NumsCourier {
+    border-left: 0;
+  }
+`;
+
+const Dec = styled.button`
+  width: 30px;
+  background: transparent;
+  outline: none;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+
+  @media (max-width: 425px) {
+    margin-top: auto;
+    margin-bottom: 5px;
+    height: 32px;
+    width: 32px;
+  }
+`;
+const Inc = styled(Dec)`
+  margin-left: 0;
 `;
