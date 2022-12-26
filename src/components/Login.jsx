@@ -149,6 +149,10 @@ const InputPair = styled.div`
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 425px) {
+    margin-botton: 1rem;
+  }
 `;
 const Label = styled.label`
   color: white;

@@ -71,6 +71,7 @@ function Cash() {
   // Function to delete a Tile from the cash component after generated
   const deleteTile = () => {
     setTiles(tiles.filter((tile, index) => index !== deleteId));
+    setSubmitables(delete submitables[deleteId]);
     setDeleteTrigger(false);
   };
 
@@ -182,7 +183,7 @@ const Section = styled.section`
   }
 
   @media (max-width: 425px) {
-    height: 35vh;
+    height: 30vh;
     width: auto;
     flex-direction: column;
     align-items: center;
@@ -263,8 +264,10 @@ const Label = styled.label`
   padding-right: 5px;
   border-bottom: 1px solid white;
 
-  &.NumsCourierlbl {
-    /* border-right: 1px solid white; */
+  @media (max-width: 425px) {
+    &.NumsCourierlbl {
+      margin-bottom: 5px;
+    }
   }
 `;
 const Input = styled.input`

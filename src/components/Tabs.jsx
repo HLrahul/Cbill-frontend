@@ -122,7 +122,7 @@ const Ullist = styled.ul`
     position: fixed;
     top: 10vh;
     right: -100%;
-    height: 35vh;
+    height: 30vh;
     gap: 10px;
     flex-direction: column;
     background-color: #000000;
