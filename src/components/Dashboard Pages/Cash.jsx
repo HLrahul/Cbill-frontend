@@ -3,16 +3,29 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Tiles from "./Tiles";
+import Popup from "../Popup";
 
 function Cash() {
-  const [nums, setNums] = useState(1);
+  const [trigger, setTrigger] = useState(false);
+
+  const [submitables, setSubmitables] = useState([]);
+
+  const [nums, setNums] = useState(0);
   const [tiles, setTiles] = useState([]);
 
-  const [from, setFrom] = useState("");
+  const [from, setFrom] = useState(" ");
   const [cn, setCn] = useState(0);
   const [phone, setPhone] = useState(0);
 
   useEffect(() => {
+    const newArray = new Array(Math.abs(nums));
+    setSubmitables(newArray);
+  }, [nums]);
+
+  const [active, setActive] = useState(false);
+
+  const handleGenerate = () => {
+    setActive(true);
     const newTiles = [];
     for (let i = 0; i < nums; i++) {
       newTiles.push(
@@ -33,11 +46,18 @@ function Cash() {
       );
     }
     setTiles(newTiles);
-  }, [nums, cn, phone, from]);
+  };
+
+  function handleReset() {
+    setNums(0);
+    setTiles([]);
+    setActive(false);
+    setTrigger(false);
+  }
 
   return (
     <>
-      <Section>
+      <Section className={active ? "active" : ""}>
         <Div>
           <InputPair>
             <Label>From</Label>
@@ -64,24 +84,35 @@ function Cash() {
             />
           </InputPair>
           <InputPair>
-            <Label className="NumsCourierlbl">Number of Couriers</Label>
+            <Label className="NumsCourierlbl">CouriersCount</Label>
             <Dec onClick={() => setNums((prevNums) => prevNums - 1)}>-</Dec>
             <Input
               className="NumsCourier"
               type="number"
               value={nums}
-              style={{ width: "5ch" }}
+              style={{ width: "5ch", textAlign: "center", paddingRight: "5px" }}
               onChange={(e) => setNums(e.target.value)}
             />
             <Inc onClick={() => setNums((prevNums) => prevNums + 1)}>+</Inc>
           </InputPair>
+          <Button onClick={handleGenerate}>GENERATE</Button>
         </Div>
       </Section>
+      <Reset className={active ? "active" : ""}>
+        <Button onClick={(e) => setTrigger(true)}>Reset</Button>
+      </Reset>
 
       <CashWrapper>{tiles}</CashWrapper>
       <ButtonWrapper>
         <Button>BOOK</Button>
       </ButtonWrapper>
+
+      <Popup
+        trigger={trigger}
+        setTrigger={setTrigger}
+        actionName="Reset"
+        actionFunc={handleReset}
+      />
     </>
   );
 }
@@ -97,7 +128,7 @@ const CashWrapper = styled.section`
 
   & > * {
     margin-top: 3rem;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 425px) {
@@ -107,6 +138,43 @@ const CashWrapper = styled.section`
       margin-top: 0.5rem;
       margin-bottom: 1rem;
     }
+  }
+`;
+
+const Section = styled.section`
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    display: none;
+  }
+
+  @media (max-width: 425px) {
+    height: 35vh;
+    width: auto;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+
+    & > * {
+      margin-right: 0;
+    }
+  }
+`;
+
+const Reset = styled.div`
+  width: 100%;
+  height: auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    display: flex;
   }
 `;
 
@@ -127,36 +195,15 @@ const Button = styled.button`
   transition: 0.5s ease;
   border-radius: 10px;
 
-  &:hover {
+  @media (max-width: 425px) {
     background: white;
     color: black;
-    box-shadow: 5px 4px 12px 0 rgba(44, 190, 190, 0.61);
-  }
-`;
 
-const Section = styled.section`
-  height: 10vh;
-  width: 100%;
-  display: flex;
-  /* flex-wrap: wrap; */
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: 425px) {
-    height: 25vh;
-    width: auto;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-
-    & > * {
-      margin-right: 0;
+    &:hover {
+      background: white;
+      color: black;
     }
   }
-
-  /* & > * {
-    margin-right: 2rem;
-  } */
 `;
 
 const Div = styled.div`

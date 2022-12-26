@@ -1,34 +1,15 @@
-import { useSelector } from "react-redux";
-
-import axios from "../api/axios";
 import styled from "styled-components";
 
-const LOGOUT_URL = "/logout";
-
 function Popup(props) {
-  const accessToken = useSelector((state) => state.user.userAccessToken);
-
-  const HandleLogout = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.post(LOGOUT_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      });
-    } catch {}
-  };
+  const { actionName, actionFunc } = props;
 
   return props.trigger ? (
     <PopupWrapper>
       <Pop>
-        <h3>Confirm Logout?</h3>
+        <h3>Confirm {actionName}?</h3>
         <br />
         <Section>
-          <Button onClick={HandleLogout}>Logout</Button>
+          <Button onClick={actionFunc}>{actionName}</Button>
           <Button onClick={() => props.setTrigger(false)}>Cancel</Button>
         </Section>
       </Pop>

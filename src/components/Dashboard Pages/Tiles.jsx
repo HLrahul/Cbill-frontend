@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import styled from "styled-components";
 
@@ -10,8 +10,12 @@ function Tiles(props) {
   const [cocom, setCocom] = useState(cn);
   const [comp, setComp] = useState(shadow);
 
-  const [ph, setPh] = useState(null);
-  const [fr, setFr] = useState(null);
+  const [to, setTo] = useState(" ");
+  const [district, setDistrict] = useState("Select");
+  const [weight, setWeight] = useState(50);
+  const [amount, setAmount] = useState(40);
+  const [ph, setPh] = useState(phone);
+  const [fr, setFr] = useState(from);
 
   useEffect(() => {
     if (cocom.toString().length === 10) {
@@ -23,18 +27,32 @@ function Tiles(props) {
     }
   }, [cocom]);
 
+  const inputRef = useRef(null);
+  useEffect(() => {
+    const input = inputRef.current;
+    input.addEventListener("click", selectInput);
+
+    return () => {
+      input.removeEventListener("click", selectInput);
+    };
+  }, []);
+  function selectInput(event) {
+    event.target.select();
+  }
+
+  const handleSave = (e) => {
+    e.preventDefault();
+  };
+  const handleDelete = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <CashFormCard>
       <CashForm>
         <Tile
           style={{
             transition: "0.5s",
-            // background:
-            //   comp === "akash"
-            //     ? "rgba(92, 92, 255, 0.25)"
-            //     : comp === "anjani"
-            //     ? "rgba(255, 78, 78, 0.25)"
-            //     : "rgba(0, 0, 0, 0.25)",
             boxShadow:
               comp === "akash"
                 ? "10px 8px 32px 0 rgba(17, 17, 236, 0.596)"
@@ -49,7 +67,6 @@ function Tiles(props) {
                 <P>{formId + 1 + ". "}</P> CN
               </Label>
               <Input
-                // style={{ width: "12ch" }}
                 value={cocom !== null ? cocom : cn}
                 type="number"
                 name="name"
@@ -60,31 +77,7 @@ function Tiles(props) {
           </DivOne>
 
           <DivTwo>
-            <DivThree>
-              {/* <span
-                  style={{
-                    boxShadow: "1px 2px 2px 2px rgba(0, 0, 0, 0.2)",
-                    transition: ".5s ease",
-                    transform: "rotate(270deg)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1rem",
-                    background:
-                      comp === "akash"
-                        ? "#12328b"
-                        : comp === "anjani"
-                        ? "#a31111"
-                        : "gray",
-                    borderRadius: "10px",
-                    color:
-                      comp === "akash"
-                        ? "#12328b"
-                        : comp === "anjani"
-                        ? "#a31111"
-                        : "gray",
-                  }}
-                  onChange={(e) => setComp(e.target.value)}
-                ></span> */}
-            </DivThree>
+            <DivThree></DivThree>
 
             <DivFour>
               <DivFive>
@@ -100,12 +93,20 @@ function Tiles(props) {
 
                 <InputPair>
                   <Label htmlFor="name">To</Label>
-                  <Input type="text" autoComplete="new-password" />
+                  <Input
+                    onChange={(e) => setTo(e.target.value)}
+                    value={to}
+                    type="text"
+                    autoComplete="new-password"
+                  />
                 </InputPair>
 
                 <InputPair>
                   <Label htmlFor="name">District</Label>
                   <Input
+                    onChange={(e) => setDistrict(e.target.value)}
+                    ref={inputRef}
+                    value={district}
                     type="text"
                     autoComplete="new-password"
                     list="availableDistricts"
@@ -122,7 +123,7 @@ function Tiles(props) {
 
               <DivSix>
                 <InputPair>
-                  <Label htmlFor="name">📞 +91</Label>
+                  <Label htmlFor="name">+91</Label>
                   <Input
                     value={ph !== null ? ph : phone}
                     onChange={(e) => setPh(e.target.value)}
@@ -135,10 +136,11 @@ function Tiles(props) {
                 <InputPair>
                   <Label htmlFor="name">⚖️</Label>
                   <Input
+                    onChange={(e) => setWeight(e.target.value)}
                     style={{ width: "7ch" }}
                     type="number"
                     step="50"
-                    defaultValue={50}
+                    defaultValue={weight}
                     autoComplete="new-password"
                   />
                 </InputPair>
@@ -146,16 +148,22 @@ function Tiles(props) {
                 <InputPair>
                   <Label htmlFor="name">₹</Label>
                   <Input
+                    onChange={(e) => setAmount(e.target.value)}
                     style={{ width: "5ch" }}
                     type="number"
                     step="10"
-                    defaultValue={40}
+                    defaultValue={amount}
                     autoComplete="new-password"
                   />
                 </InputPair>
+
+                <Button onClick={handleSave} className="savebtn">
+                  Save
+                </Button>
               </DivSix>
             </DivFour>
           </DivTwo>
+          <ButtonDiv></ButtonDiv>
         </Tile>
       </CashForm>
     </CashFormCard>
@@ -206,7 +214,7 @@ const Tile = styled.div`
 
   @media (max-width: 425px) {
     padding: 0;
-    min-height: 40vh;
+    min-height: 50vh;
     align-items: center;
     justify-content: center;
     width: 80%;
@@ -250,6 +258,7 @@ const DivFour = styled.div`
   flex-direction: column;
 
   @media (max-width: 425px) {
+    height: auto;
   }
 `;
 const DivFive = styled.div`
@@ -264,6 +273,7 @@ const DivFive = styled.div`
   }
 
   @media (max-width: 425px) {
+    height: auto;
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -281,7 +291,30 @@ const DivSix = styled.div`
   }
 
   @media (max-width: 425px) {
+    height: auto;
     flex-direction: column;
+  }
+`;
+
+const ButtonDiv = styled.div``;
+
+const Button = styled.button`
+  margin-right: 1rem;
+  height: 2rem;
+  width: 4rem;
+  background: white;
+  color: black;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 10px;
+
+  &.savebtn:hover {
+    background: rgba(12, 216, 63, 0.61);
+    /* box-shadow: 5px 4px 12px 0 rgba(12, 216, 63, 0.61); */
+  }
+  &.deletebtn:hover {
+    background: rgba(214, 20, 20, 0.61);
+    /* box-shadow: 5px 4px 12px 0 rgba(214, 20, 20, 0.61); */
   }
 `;
 

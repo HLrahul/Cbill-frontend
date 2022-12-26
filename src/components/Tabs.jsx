@@ -1,11 +1,41 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
+import axios from "../api/axios";
 import styled from "styled-components";
 import Popup from "./Popup";
+
+const LOGOUT_URL = "/logout";
 
 function Tabs() {
   const [trigger, setTrigger] = useState(false);
   const [active, setActive] = useState(false);
+
+  const accessToken = useSelector((state) => state.user.userAccessToken);
+
+  const navigate = useNavigate();
+  const HandleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(LOGOUT_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      });
+      setTrigger(false);
+      navigate("/");
+    } catch (err) {
+      if (!err?.response) {
+        console.log("No response from Server");
+      } else {
+        console.log("Something went wrong");
+      }
+    }
+  };
 
   function toggleActive() {
     setActive((prevActive) => !prevActive);
@@ -35,7 +65,12 @@ function Tabs() {
         </Div>
       </TabLinks>
 
-      <Popup trigger={trigger} setTrigger={setTrigger} />
+      <Popup
+        trigger={trigger}
+        setTrigger={setTrigger}
+        actionName="Logout"
+        actionFunc={HandleLogout}
+      />
     </TabsWrapper>
   );
 }

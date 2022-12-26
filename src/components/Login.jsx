@@ -58,7 +58,7 @@ function Login() {
             style={{
               fontSize: "2rem",
               textAlign: "center",
-              marginBottom: "1.5rem",
+              marginBottom: "1rem",
               color: "white",
               // color: "#3fc0e0",
               letterSpacing: "2px",
