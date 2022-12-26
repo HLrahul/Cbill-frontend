@@ -1,29 +1,37 @@
+// Imports
 import { useEffect, useState } from "react";
-
 import styled from "styled-components";
-
 import Tiles from "./Tiles";
 import Popup from "../Popup";
 
+// Cash functional component
 function Cash() {
+  // Triggers for Popups
   const [trigger, setTrigger] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [deleteTrigger, setDeleteTrigger] = useState(false);
 
-  const [submitables, setSubmitables] = useState([]);
+  // State for the Final Submitables
+  const [submitables, setSubmitables] = useState({});
 
-  const [nums, setNums] = useState(0);
-  const [tiles, setTiles] = useState([]);
-
+  // State for the cash input field values
   const [from, setFrom] = useState(" ");
   const [cn, setCn] = useState(0);
   const [phone, setPhone] = useState(0);
+  const [nums, setNums] = useState(0);
 
-  useEffect(() => {
-    const newArray = new Array(Math.abs(nums));
-    setSubmitables(newArray);
-  }, [nums]);
+  // State for the Tiles
+  const [tiles, setTiles] = useState([]);
 
+  // State for the Generate and Reset actions
   const [active, setActive] = useState(false);
 
+  // Debugging goes here
+  useEffect(() => {
+    console.log(submitables);
+  }, [submitables]);
+
+  // Function to handle the Generate button for generating Tiles
   const handleGenerate = () => {
     setActive(true);
     const newTiles = [];
@@ -42,12 +50,17 @@ function Cash() {
               ? "akash"
               : ""
           }
+          setDeleteTrigger={setDeleteTrigger}
+          setDeleteId={setDeleteId}
+          submitables={submitables}
+          setSubmitables={setSubmitables}
         />
       );
     }
     setTiles(newTiles);
   };
 
+  // Function to handle the Reset button
   function handleReset() {
     setNums(0);
     setTiles([]);
@@ -55,6 +68,13 @@ function Cash() {
     setTrigger(false);
   }
 
+  // Function to delete a Tile from the cash component after generated
+  const deleteTile = () => {
+    setTiles(tiles.filter((tile, index) => index !== deleteId));
+    setDeleteTrigger(false);
+  };
+
+  // Actual Cash Component JSX
   return (
     <>
       <Section className={active ? "active" : ""}>
@@ -68,7 +88,7 @@ function Cash() {
             />
           </InputPair>
           <InputPair>
-            <Label>Courier Number</Label>
+            <Label>C.Number</Label>
             <Input
               type="number"
               style={{ width: "12ch" }}
@@ -76,7 +96,7 @@ function Cash() {
             />
           </InputPair>
           <InputPair>
-            <Label>Phone Number</Label>
+            <Label>Ph.Number</Label>
             <Input
               type="number"
               style={{ width: "12ch" }}
@@ -113,11 +133,18 @@ function Cash() {
         actionName="Reset"
         actionFunc={handleReset}
       />
+      <Popup
+        trigger={deleteTrigger}
+        setTrigger={setDeleteTrigger}
+        actionName="Delete Tile"
+        actionFunc={deleteTile}
+      />
     </>
   );
 }
 export default Cash;
 
+//  Styling of the Cash Component
 const CashWrapper = styled.section`
   width: 100%;
   min-height: 70vh;
@@ -144,10 +171,11 @@ const CashWrapper = styled.section`
 const Section = styled.section`
   height: 10vh;
   width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
   display: flex;
-  /* flex-wrap: wrap; */
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 
   &.active {
     display: none;
@@ -187,22 +215,23 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled.button`
+  font-size: 0.7rem;
   height: 2rem;
   width: 5rem;
-  background: transparent;
+  background: black;
   color: white;
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 10px;
 
+  &:hover {
+    color: black;
+    background: white;
+  }
+
   @media (max-width: 425px) {
     background: white;
     color: black;
-
-    &:hover {
-      background: white;
-      color: black;
-    }
   }
 `;
 
@@ -235,7 +264,7 @@ const Label = styled.label`
   border-bottom: 1px solid white;
 
   &.NumsCourierlbl {
-    border-right: 1px solid white;
+    /* border-right: 1px solid white; */
   }
 `;
 const Input = styled.input`
@@ -272,6 +301,10 @@ const Input = styled.input`
 
   &.NumsCourier {
     border-left: 0;
+
+    @media (max-width: 425px) {
+      margin-bottom: 5px;
+    }
   }
 `;
 

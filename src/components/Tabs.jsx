@@ -19,13 +19,14 @@ function Tabs() {
     e.preventDefault();
 
     try {
-      await axios.post(LOGOUT_URL, {
+      const response = await axios.post(LOGOUT_URL, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
         withCredentials: true,
       });
+      console.log(response);
       setTrigger(false);
       navigate("/");
     } catch (err) {
@@ -121,7 +122,7 @@ const Ullist = styled.ul`
     position: fixed;
     top: 10vh;
     right: -100%;
-    height: 25vh;
+    height: 35vh;
     gap: 10px;
     flex-direction: column;
     background-color: #000000;

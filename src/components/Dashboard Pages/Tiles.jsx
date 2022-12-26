@@ -1,32 +1,46 @@
+// Imports
 import { useState, useEffect, useRef } from "react";
-
+import { districts } from "./districtList";
 import styled from "styled-components";
 
-import { districts } from "./districtList";
-
+// Tiles Functional Component
 function Tiles(props) {
-  const { formId, cn, from, phone, shadow } = props;
+  // Destructuring Props
+  const {
+    formId,
+    cn,
+    from,
+    phone,
+    shadow,
+    setDeleteTrigger,
+    setDeleteId,
+    submitables,
+    setSubmitables,
+  } = props;
 
-  const [cocom, setCocom] = useState(cn);
+  // States for the Form fields
   const [comp, setComp] = useState(shadow);
 
+  const [cnum, setcnum] = useState(cn);
+  const [fr, setFr] = useState(from);
   const [to, setTo] = useState(" ");
   const [district, setDistrict] = useState("Select");
+  const [ph, setPh] = useState(phone);
   const [weight, setWeight] = useState(50);
   const [amount, setAmount] = useState(40);
-  const [ph, setPh] = useState(phone);
-  const [fr, setFr] = useState(from);
 
+  // UseEffect hook for changing the background color of the Tile depending on the Company
   useEffect(() => {
-    if (cocom.toString().length === 10) {
+    if (cnum.toString().length === 10) {
       setComp("anjani");
-    } else if (cocom.toString().length === 9) {
+    } else if (cnum.toString().length === 9) {
       setComp("akash");
     } else {
       setComp("NULL");
     }
-  }, [cocom]);
+  }, [cnum]);
 
+  //  This segment is to select the whole word when clicked on the District input field
   const inputRef = useRef(null);
   useEffect(() => {
     const input = inputRef.current;
@@ -40,13 +54,34 @@ function Tiles(props) {
     event.target.select();
   }
 
+  //UseState & UseEffect hook to check whether the TileValues present in the Submitables
+  const [inSubmitables, setInSubmitables] = useState(false);
+  useEffect(() => {
+    setInSubmitables(formId in submitables);
+  }, [submitables]);
+
+  // To save the Tile state to the Final Submitables state for posting it to api
   const handleSave = (e) => {
     e.preventDefault();
-  };
-  const handleDelete = (e) => {
-    e.preventDefault();
+
+    const TileValues = {
+      [formId]: {
+        courier_number: cnum,
+        courier_type: "cash",
+        courier_company: comp,
+        from_company: fr,
+        to_company: to,
+        to_destination: district,
+        courier_weight: weight,
+        courier_rate: amount,
+        phone_no: ph,
+      },
+    };
+
+    setSubmitables({ ...submitables, ...TileValues });
   };
 
+  // Actual Tile Component JSX
   return (
     <CashFormCard>
       <CashForm>
@@ -61,16 +96,25 @@ function Tiles(props) {
                 : "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
           }}
         >
+          <Delete
+            onClick={(e) => {
+              setDeleteTrigger(true);
+              setDeleteId(formId);
+            }}
+          >
+            <Span className="bar"></Span>
+            <Span className="bar"></Span>
+          </Delete>
           <DivOne>
             <InputPair>
               <Label htmlFor="name" style={{ display: "flex" }}>
                 <P>{formId + 1 + ". "}</P> CN
               </Label>
               <Input
-                value={cocom !== null ? cocom : cn}
+                value={cnum !== null ? cnum : cn}
                 type="number"
                 name="name"
-                onChange={(e) => setCocom(e.target.value)}
+                onChange={(e) => setcnum(e.target.value)}
                 autoComplete="off"
               />
             </InputPair>
@@ -160,6 +204,7 @@ function Tiles(props) {
                 <Button onClick={handleSave} className="savebtn">
                   Save
                 </Button>
+                <Check className={inSubmitables ? "saved" : ""}>✓</Check>
               </DivSix>
             </DivFour>
           </DivTwo>
@@ -171,6 +216,7 @@ function Tiles(props) {
 }
 export default Tiles;
 
+// Styling for the JSX Elements
 const CashFormCard = styled.div`
   height: 90%;
   width: 40%;
@@ -196,6 +242,7 @@ const P = styled.p`
   /* color: #4dcc2d;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; */
+  color: #3fc0e0;
 `;
 
 const Tile = styled.div`
@@ -220,6 +267,39 @@ const Tile = styled.div`
     width: 80%;
   }
 `;
+
+const Delete = styled.div`
+  position: absolute;
+  left: 90%;
+
+  cursor: pointer;
+  & .bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+  & .bar:nth-child(2) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  &:hover {
+    .bar {
+      background-color: #db1212;
+    }
+  }
+
+  @media (max-width: 425px) {
+    left: 87%;
+    bottom: 85%;
+  }
+`;
+const Span = styled.span`
+  display: block;
+  width: 20px;
+  height: 3px;
+  margin: 10px auto;
+  background-color: white;
+  transition: 0.3s;
+`;
+
 const DivOne = styled.div`
   display: flex;
   align-items: center;
@@ -287,7 +367,7 @@ const DivSix = styled.div`
   width: 100%;
 
   & > * {
-    margin-right: 2rem;
+    margin-right: 1.5rem;
   }
 
   @media (max-width: 425px) {
@@ -360,5 +440,15 @@ const Input = styled.input`
 
   @media (max-width: 425px) {
     width: 100%;
+  }
+`;
+
+const Check = styled.span`
+  font-size: xx-large;
+  display: none;
+  color: #0dd10d;
+
+  &.saved {
+    display: block;
   }
 `;
