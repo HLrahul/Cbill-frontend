@@ -201,10 +201,12 @@ function Tiles(props) {
                   />
                 </InputPair>
 
-                <Button onClick={handleSave} className="savebtn">
-                  Save
-                </Button>
-                <Check className={inSubmitables ? "saved" : ""}>✓</Check>
+                <Wrap>
+                  <Button onClick={handleSave} className="savebtn">
+                    Save
+                  </Button>
+                  <Check className={inSubmitables ? "saved" : ""}>✓</Check>
+                </Wrap>
               </DivSix>
             </DivFour>
           </DivTwo>
@@ -443,6 +445,10 @@ const Input = styled.input`
   }
 `;
 
+const Wrap = styled.div`
+  display: flex;
+`;
+
 const Check = styled.span`
   font-size: xx-large;
   display: none;
@@ -450,5 +456,9 @@ const Check = styled.span`
 
   &.saved {
     display: block;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 1.5rem;
   }
 `;
