@@ -28,8 +28,10 @@ function Cash() {
 
   // Debugging goes here
   useEffect(() => {
-    console.log(submitables);
-  }, [submitables]);
+    console.log("submitables = ", submitables);
+    console.log("deleteId = ", deleteId);
+    console.log("tiles = ", tiles);
+  }, [submitables, deleteId, tiles]);
 
   // Function to handle the Generate button for generating Tiles
   const handleGenerate = () => {
@@ -65,13 +67,17 @@ function Cash() {
     setNums(0);
     setTiles([]);
     setActive(false);
+    setSubmitables({});
     setTrigger(false);
   }
 
   // Function to delete a Tile from the cash component after generated
   const deleteTile = () => {
-    setTiles(tiles.filter((tile, index) => index !== deleteId));
-    setSubmitables(delete submitables[deleteId]);
+    setTiles(tiles.filter((tile) => tile.key !== String(deleteId)));
+    setSubmitables((prevSubmitables) => {
+      const { [deleteId]: deleted, ...rest } = prevSubmitables;
+      return rest;
+    });
     setDeleteTrigger(false);
   };
 

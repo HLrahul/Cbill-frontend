@@ -54,19 +54,21 @@ function Tiles(props) {
     event.target.select();
   }
 
-  //UseState & UseEffect hook to check whether the TileValues present in the Submitables
+  //UseState  hook to check whether the TileValues present in the Submitables
   const [inSubmitables, setInSubmitables] = useState(false);
   useEffect(() => {
-    setInSubmitables(formId in submitables);
-  }, [submitables]);
+    setInSubmitables(false);
+  }, [cnum, fr, to, district, ph, weight, amount]);
 
   // To save the Tile state to the Final Submitables state for posting it to api
   const handleSave = (e) => {
     e.preventDefault();
 
+    setInSubmitables(true);
+
     const TileValues = {
       [formId]: {
-        courier_number: cnum,
+        courier_number: parseInt(cnum),
         courier_type: "cash",
         courier_company: comp,
         from_company: fr,
@@ -74,11 +76,13 @@ function Tiles(props) {
         to_destination: district,
         courier_weight: weight,
         courier_rate: amount,
-        phone_no: ph,
+        phone_no: parseInt(ph),
       },
     };
 
-    setSubmitables({ ...submitables, ...TileValues });
+    setSubmitables((prevSubmitables) => {
+      return { ...prevSubmitables, ...TileValues };
+    });
   };
 
   // Actual Tile Component JSX
@@ -450,7 +454,7 @@ const Wrap = styled.div`
 `;
 
 const Check = styled.span`
-  font-size: xx-large;
+  font-size: 1.5rem;
   display: none;
   color: #0dd10d;
 
