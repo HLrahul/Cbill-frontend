@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../store/store";
 
 import axios from "../api/axios";
 import styled from "styled-components";
 import Popup from "./Popup";
 
-const LOGOUT_URL = "/logout";
+const LOGOUT_URL = "/logout/";
 
 function Tabs() {
   const [trigger, setTrigger] = useState(false);
   const [active, setActive] = useState(false);
 
-  const accessToken = useSelector((state) => state.user.userAccessToken);
+  const refresh = RefreshToken();
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const HandleLogout = async (e) => {
     e.preventDefault();
@@ -22,12 +24,10 @@ function Tabs() {
       const response = await axios.post(LOGOUT_URL, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
-        withCredentials: true,
       });
-      console.log(response);
       setTrigger(false);
+      dispatch(logout());
       navigate("/");
     } catch (err) {
       if (!err?.response) {
@@ -78,6 +78,7 @@ function Tabs() {
 
 export default Tabs;
 
+// Styling for the above component
 const TabsWrapper = styled.section`
   top: 0;
   position: sticky;
@@ -96,7 +97,7 @@ const TabLinks = styled.div`
 
 const Header = styled.div`
   height: inherit;
-  width: 50%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;

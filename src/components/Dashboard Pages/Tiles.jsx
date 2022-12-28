@@ -14,7 +14,6 @@ function Tiles(props) {
     shadow,
     setDeleteTrigger,
     setDeleteId,
-    submitables,
     setSubmitables,
   } = props;
 
@@ -245,10 +244,8 @@ const CashForm = styled.form`
 `;
 
 const P = styled.p`
-  /* color: #4dcc2d;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; */
-  color: #3fc0e0;
+  letter-spacing: 2px;
+  color: #cee213;
 `;
 
 const Tile = styled.div`
@@ -259,7 +256,6 @@ const Tile = styled.div`
   width: 50;
 
   background: rgba(0, 0, 0, 0.25);
-  /* box-shadow: 0 8px 32px 0 rgba(250, 250, 253, 0.37); */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
@@ -315,6 +311,7 @@ const DivOne = styled.div`
   @media (max-width: 425px) {
     width: 70%;
     height: auto;
+    margin-left: 5px;
   }
 `;
 const DivTwo = styled.div`
@@ -396,11 +393,9 @@ const Button = styled.button`
 
   &.savebtn:hover {
     background: rgba(12, 216, 63, 0.61);
-    /* box-shadow: 5px 4px 12px 0 rgba(12, 216, 63, 0.61); */
   }
   &.deletebtn:hover {
     background: rgba(214, 20, 20, 0.61);
-    /* box-shadow: 5px 4px 12px 0 rgba(214, 20, 20, 0.61); */
   }
 `;
 

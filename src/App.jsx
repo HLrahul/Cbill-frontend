@@ -3,20 +3,21 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 
 import styled from "styled-components";
-import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
+import RequireAuth from "./components/hooks/RequireAuth";
 
 function App() {
   return (
     <Provider store={store}>
       <AppWrapper>
         <Router>
-          {/* <Navbar /> */}
-
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route element={<RequireAuth />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
           </Routes>
         </Router>
       </AppWrapper>

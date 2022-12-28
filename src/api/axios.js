@@ -1,6 +1,12 @@
 import axios from "axios";
 
+const BASE_URL = "http://127.0.01:8000/api/";
+
 export default axios.create({
-  baseURL: "http://127.0.01:8000/api/",
-  // baseURL: "https://cbilling-api.azurewebsites.net/api/",
+  baseURL: BASE_URL,
+});
+
+export const axiosPrivate = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
 });

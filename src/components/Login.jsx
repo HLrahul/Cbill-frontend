@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { login } from "../store/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -16,9 +16,6 @@ function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const userName = useSelector((state) => state.user.userName);
-  const accessToken = useSelector((state) => state.user.userAccessToken);
 
   const LoginHandler = async (e) => {
     e.preventDefault();
