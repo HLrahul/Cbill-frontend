@@ -5,7 +5,7 @@ import { store } from "./store/store";
 import styled from "styled-components";
 import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
-import RequireAuth from "./components/hooks/RequireAuth";
+import RequireAuth from "./hooks/RequireAuth";
 
 function App() {
   return (

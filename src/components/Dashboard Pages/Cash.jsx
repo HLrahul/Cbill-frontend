@@ -3,9 +3,15 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Tiles from "./Tiles";
 import Popup from "../Popup";
+import useAxiosPrivate from "../../hooks/usePrivateAxios";
+
+const POST_URL = "";
 
 // Cash functional component
 function Cash() {
+  // Custom hook
+  const axiosPrivate = useAxiosPrivate();
+
   // Triggers for Popups
   const [trigger, setTrigger] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -32,6 +38,27 @@ function Cash() {
     console.log("deleteId = ", deleteId);
     console.log("tiles = ", tiles);
   }, [submitables, deleteId, tiles]);
+
+  const postToApi = async (data) => {
+    try {
+      const response = await axiosPrivate.post(POST_URL, JSON.stringify(data), {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(response);
+    } catch (err) {
+      if (!err?.response) {
+        console.log("NO SERVER RESPONSE");
+      } else {
+        console.log(err);
+      }
+    }
+  };
+  const handleSubmit = () => {
+    Object.keys(submitables).map((key) => {
+      const data = submitables[key];
+      return postToApi(data);
+    });
+  };
 
   // Function to handle the Generate button for generating Tiles
   const handleGenerate = () => {
@@ -131,7 +158,7 @@ function Cash() {
 
       <CashWrapper>{tiles}</CashWrapper>
       <ButtonWrapper>
-        <Button>BOOK</Button>
+        <Button onClick={handleSubmit}>BOOK</Button>
       </ButtonWrapper>
 
       <Popup

@@ -26,7 +26,6 @@ function Login() {
         JSON.stringify({ username, password }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
         }
       );
       dispatch(

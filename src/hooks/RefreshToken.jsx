@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/store";
-import axios from "../../api/axios";
+import { login } from "../store/store";
+import axios from "../api/axios";
 
 const REFRESH_URL = "/token/refresh/";
 

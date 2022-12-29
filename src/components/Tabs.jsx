@@ -13,8 +13,6 @@ function Tabs() {
   const [trigger, setTrigger] = useState(false);
   const [active, setActive] = useState(false);
 
-  const refresh = RefreshToken();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const HandleLogout = async (e) => {
