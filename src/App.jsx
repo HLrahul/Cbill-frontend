@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
 import RequireAuth from "./hooks/RequireAuth";
+import PersistLogin from "./components/PersistLogin";
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
 
-            <Route element={<RequireAuth />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
             </Route>
           </Routes>
         </Router>

@@ -111,7 +111,7 @@ const P = styled.p`
 
 const Ullist = styled.ul`
   height: 10vh;
-  width: 80%;
+  width: 70%;
   display: flex;
   align-items: center;
   justify-content: center;

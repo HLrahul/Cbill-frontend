@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login } from "../store/store";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import styled from "styled-components";
 import axios from "../api/axios";
@@ -16,6 +16,8 @@ function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const LoginHandler = async (e) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ function Login() {
         })
       );
       setMsg("Login Successful!");
-      navigate("/dashboard");
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setMsg("NO SERVER RESPONSE!");

@@ -4,6 +4,7 @@ const BASE_URL = "http://127.0.01:8000/api/";
 
 export default axios.create({
   baseURL: BASE_URL,
+  withCredentials: true,
 });
 
 export const axiosPrivate = axios.create({

@@ -61,7 +61,9 @@ function Cash() {
   };
 
   // Function to handle the Generate button for generating Tiles
-  const handleGenerate = () => {
+  const handleGenerate = (e) => {
+    e.preventDefault();
+
     setActive(true);
     const newTiles = [];
     for (let i = 0; i < nums; i++) {
@@ -112,45 +114,68 @@ function Cash() {
   return (
     <>
       <Section className={active ? "active" : ""}>
-        <Div>
-          <InputPair>
-            <Label>From</Label>
-            <Input
-              type="text"
-              style={{ width: "16ch" }}
-              onChange={(e) => setFrom(e.target.value)}
-            />
-          </InputPair>
-          <InputPair>
-            <Label>C.Number</Label>
-            <Input
-              type="number"
-              style={{ width: "12ch" }}
-              onChange={(e) => setCn(e.target.value)}
-            />
-          </InputPair>
-          <InputPair>
-            <Label>Ph.Number</Label>
-            <Input
-              type="number"
-              style={{ width: "12ch" }}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </InputPair>
-          <InputPair>
-            <Label className="NumsCourierlbl">CouriersCount</Label>
-            <Dec onClick={() => setNums((prevNums) => prevNums - 1)}>-</Dec>
-            <Input
-              className="NumsCourier"
-              type="number"
-              value={nums}
-              style={{ width: "5ch", textAlign: "center", paddingRight: "5px" }}
-              onChange={(e) => setNums(e.target.value)}
-            />
-            <Inc onClick={() => setNums((prevNums) => prevNums + 1)}>+</Inc>
-          </InputPair>
-          <Button onClick={handleGenerate}>GENERATE</Button>
-        </Div>
+        <Form onSubmit={handleGenerate} method="none">
+          <Div>
+            <InputPair>
+              <Label>From</Label>
+              <Input
+                type="text"
+                style={{ width: "16ch" }}
+                onChange={(e) => setFrom(e.target.value)}
+                required
+              />
+            </InputPair>
+            <InputPair>
+              <Label>C.Number</Label>
+              <Input
+                type="number"
+                style={{ width: "12ch" }}
+                onChange={(e) => setCn(e.target.value)}
+                required
+              />
+            </InputPair>
+            <InputPair>
+              <Label>Ph.Number</Label>
+              <Input
+                type="number"
+                style={{ width: "12ch" }}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </InputPair>
+            <InputPair>
+              <Label className="NumsCourierlbl">CouriersCount</Label>
+              <Dec
+                onClick={(e) => {
+                  e.preventDefault();
+                  setNums((prevNums) => prevNums - 1);
+                }}
+              >
+                -
+              </Dec>
+              <Input
+                required
+                className="NumsCourier"
+                type="number"
+                value={nums}
+                style={{
+                  width: "5ch",
+                  textAlign: "center",
+                  paddingRight: "5px",
+                }}
+                onChange={(e) => setNums(e.target.value)}
+              />
+              <Inc
+                onClick={(e) => {
+                  e.preventDefault();
+                  setNums((prevNums) => prevNums + 1);
+                }}
+              >
+                +
+              </Inc>
+            </InputPair>
+            <Button type="submit">GENERATE</Button>
+          </Div>
+        </Form>
       </Section>
       <Reset className={active ? "active" : ""}>
         <Button onClick={(e) => setTrigger(true)}>Reset</Button>
@@ -200,6 +225,13 @@ const CashWrapper = styled.section`
       margin-bottom: 1rem;
     }
   }
+`;
+
+const Form = styled.form`
+  height: inherit;
+  width: inherit;
+  display: flex;
+  justify-content: space-around;
 `;
 
 const Section = styled.section`
