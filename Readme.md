@@ -11,9 +11,26 @@
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/Dashboard.png)
   
+  > This Dashboard component consist of the `search box` for `tracking down` the courier status.
+  >
+  > The courier status consists of the following details
+    - Where the courier is `Origin`ated From?
+    - Where the courier has `current`ly reached?
+    - Has the courier reached its `destination` or not?
+    - When the courier reached the specific branch? ( `date` and `time` )
+    - How the courier reached the specific branch? ( by `road` / `train` / `air` etc... )
+    
+<Hr>
+  
 - `Cash`
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/Cash.png)
+  
+  > The Cash component allows us to `book` couriers based on cash paying clients!
+  >
+  > The `input` fields are helpful in `filling` in the `repetetive` details like `from`, `courier number`, `phone` etc...
+  
+<Hr>
   
 - `CashTiles`
 
