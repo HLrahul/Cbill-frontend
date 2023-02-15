@@ -36,18 +36,61 @@
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/Cash%20Tiles.png)
   
+  > Cash Tiles are the actual forms that are to be filled to `book` the details of the courier.
+  >
+  > The repetetive details are already filled in every tiles and each tile has it's own `state`.
+  >
+  > There are various `interactions` that can be made with the tiles
+    - `Add` a new tile.
+    - `Delete` a tile.
+  
+<Hr>
+  
 - `Credit`
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/Credit.png)
+  
+  > The Credit component allows to have a look through the `credit clients` of the company.
+  >
+  > Every credit client of the company are listed in `sorted` order and `search` bar allows us to search clients on the go.
+  >
+  > Once we click on a specific credit company tile, we will be redirected to the `partyBook` component.
+  
+<Hr>
   
 - `PartyBook`
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/PartyBook.png)
   
+  > The partyBook component consist of various other components, namely
+    - `Frequent Parties`
+    
+      > Lists the frequent parties of the specific credit clien.
+    - `Booked couriers`
+    
+      > Lists the already booked couriers of the specific credit client.
+    - `PartyPage`
+    
+      > Allows to book couriers the same way we do in the cash compoenent.
+      
+<Hr>
+  
 - `Records`
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/Records.png)
   
+  > Every booked courier details are listed in the records component
+  >
+  > This allows has been implemented with the `Infinite Scroll` methodology to load `additional records` with every scroll.
+  >
+  > Various functionalities with records are,
+    - `Edit` on the go.
+    - `Delete` with confirmation `popup`.
+ 
+<Hr>
+  
 - `Editable Records`
 
   ![](https://github.com/HLrahul/Cbill-frontend/blob/main/Images%20of%20CB/Editable%20Record.png)
+  
+  > Edit the records `on the go` without much effort and efficiently as well.
