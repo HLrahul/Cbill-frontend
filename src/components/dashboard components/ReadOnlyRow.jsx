@@ -1,7 +1,6 @@
 // Imports
 import { format } from "date-fns";
 import styled from "styled-components";
-import usePrivateAxios from "../../hooks/usePrivateAxios";
 
 // Function to render the Table records in the table
 function ReadOnlyRow(props) {
@@ -17,11 +16,14 @@ function ReadOnlyRow(props) {
     courier_type,
     courier_company,
     from_company,
+    from_company_phone_number,
     to_company,
+    to_company_phone_number,
     to_destination,
     courier_weight,
     courier_rate,
     phone_no,
+    is_paid,
     booked_date,
     booked_time,
   } = record;
@@ -34,9 +36,6 @@ function ReadOnlyRow(props) {
   const timeFormatter = new Intl.DateTimeFormat("en-US", timeOptions);
   const formattedTime = timeFormatter.format(time);
 
-  // axiosPrivate instance from usePrivateAxios
-  const axiosPrivate = usePrivateAxios();
-
   // jsx element for the row in the table
   return (
     <Tr key={index}>
@@ -44,11 +43,14 @@ function ReadOnlyRow(props) {
       <Td data-label="C.Type">{courier_type}</Td>
       <Td data-label="C.Company">{courier_company}</Td>
       <Td data-label="From">{from_company}</Td>
+      <Td data-label="From Party Phone">{from_company_phone_number}</Td>
       <Td data-label="To">{to_company}</Td>
+      <Td data-label="To Party Phone">{to_company_phone_number}</Td>
       <Td data-label="Destination">{to_destination}</Td>
       <Td data-label="Weight">{courier_weight}</Td>
       <Td data-label="Amount">{courier_rate}</Td>
       <Td data-label="Phone">{phone_no}</Td>
+      <Td data-label="Paid">{is_paid}</Td>
       <Td data-label="Date">{formattedDate}</Td>
       <Td data-label="Time">{formattedTime}</Td>
       <Td data-label="Edit">

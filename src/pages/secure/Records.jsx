@@ -116,6 +116,7 @@ function Records() {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     getRecords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleScroll = () => {
@@ -135,6 +136,7 @@ function Records() {
     return () => {
       window.onscroll = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Actual records JSX element.
@@ -161,6 +163,7 @@ function Records() {
                     <Th>Phone</Th>
                     <Th>Date</Th>
                     <Th>Time</Th>
+                    <Th>Paid</Th>
                     <Th>Edit</Th>
                     <Th>Delete</Th>
                   </Tr>
@@ -212,8 +215,8 @@ export default Records;
 
 // Stylings
 const RecordsWrapper = styled.div`
-  padding-top: 5vh;
-  min-height: 100vh;
+  padding-top: 5svh;
+  min-height: 100svh;
   width: 100%;
   background: #2f3136;
   display: flex;
@@ -236,7 +239,7 @@ const RecWrapper = styled.div`
 `;
 
 const RecordsArea = styled.div`
-  min-height: 100vh;
+  min-height: 100svh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -245,7 +248,7 @@ const RecordsArea = styled.div`
 `;
 
 const LoadNext = styled.div`
-  height: 10vh;
+  height: 10svh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -275,7 +278,7 @@ const LoadNextPage = styled.span`
 `;
 
 const Exclam = styled.div`
-  height: 50vh;
+  height: 50svh;
   width: auto;
   display: flex;
   justify-content: center;
@@ -298,7 +301,7 @@ const Tbody = styled.tbody`
   }
 
   & Th {
-    top: 10vh;
+    top: 10svh;
     position: sticky;
   }
 
